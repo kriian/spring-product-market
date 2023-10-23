@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Test</title>
+</head>
+<body>
+
+<h1>Hello Client</h1>
+<br>
+<span th:text="${product.title}"></span>
+<span th:text="${product.id}"></span>
+<a th:href="@{/product/all}">На странице со всеми клиентами</a>
+
+</body>
+</html>
