@@ -1,31 +1,41 @@
 package ru.hehnev.springproductmarket.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.*;
 import ru.hehnev.springproductmarket.model.Product;
 import ru.hehnev.springproductmarket.service.ProductService;
 
-@Controller
+import java.util.List;
+
+@RequiredArgsConstructor
+@RestController
 @RequestMapping("/products")
 public class ProductController {
 
-    @Autowired
-    private ProductService productService;
+    private final ProductService productService;
 
     @GetMapping("/{id}")
-    public String getTest(@PathVariable Long id, Model model) {
-        Product product = productService.findById(id);
-        model.addAttribute("product", product);
-        return "product_page";
+    public Product getProductById(@PathVariable Long id) {
+        return productService.findById(id);
     }
 
-    @GetMapping("/all")
-    public String getTest(Model model) {
-        model.addAttribute("products", productService.findAll());
-        return "product_info_page";
+    @GetMapping
+    public List<Product> getAllProducts() {
+        return productService.findAll();
+    }
+
+    @PostMapping
+    public void addProduct(@RequestBody Product product) {
+        productService.addProduct(product);
+    }
+
+    @GetMapping("/change_price")
+    public void changePrice(@RequestParam Long id, @RequestParam Integer price) {
+        productService.changeProductPrice(id, price);
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteProduct(@PathVariable Long id) {
+        productService.deleteProduct(id);
     }
 }

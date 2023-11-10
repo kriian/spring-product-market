@@ -17,10 +17,10 @@ public class ProductRepositoryImpl implements ProductRepository {
     @PostConstruct
     public void init() {
         products = new ArrayList<>() {{
-           add(new Product(1L, "Молоко"));
-           add(new Product(2L, "Хлеб"));
-           add(new Product(3L, "Сыр"));
-           add(new Product(4L, "Каша"));
+           add(new Product(1L, "Молоко", 71));
+           add(new Product(2L, "Хлеб", 52));
+           add(new Product(3L, "Сыр", 800));
+           add(new Product(4L, "Каша", 100));
         }};
     }
     @Override
@@ -34,5 +34,21 @@ public class ProductRepositoryImpl implements ProductRepository {
                 .filter(product -> product.getId().equals(id))
                 .findFirst()
                 .orElseThrow(() -> new NoSuchElementException("No such product. id = " + id));
+    }
+
+    @Override
+    public void addProduct(Product product) {
+        products.add(product);
+    }
+
+    @Override
+    public void changeProductPrice(Long id, Integer price) {
+        Product product = findById(id);
+        product.setPrice(product.getPrice() + price);
+    }
+
+    @Override
+    public void deleteProduct(Long id) {
+        products.removeIf(p -> p.getId().equals(id));
     }
 }

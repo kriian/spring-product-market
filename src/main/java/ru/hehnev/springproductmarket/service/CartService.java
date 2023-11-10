@@ -6,5 +6,5 @@ import java.util.List;
 
 public interface CartService {
     List<Product> findAllProducts();
-    boolean addProduct(Long id, String title);
+    boolean addProduct(Long id, String title, Integer price);
 }

@@ -20,7 +20,7 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
-    public boolean addProduct(Long id, String title) {
-        return cartRepository.addProduct(new Product(id, title));
+    public boolean addProduct(Long id, String title, Integer price) {
+        return cartRepository.addProduct(new Product(id, title, price));
     }
 }
