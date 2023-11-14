@@ -1,15 +1,13 @@
 package ru.hehnev.springproductmarket.service.impl;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.hehnev.springproductmarket.model.Product;
 import ru.hehnev.springproductmarket.repository.ProductRepository;
 import ru.hehnev.springproductmarket.service.ProductService;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @Service
 @RequiredArgsConstructor
@@ -23,7 +21,8 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public Product findById(Long id) {
-        return productRepository.findById(id);
+        return productRepository.findById(id)
+                .orElseThrow(() -> new NoSuchElementException("No such product. id = " + id));
     }
 
     @Override

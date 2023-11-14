@@ -1,6 +1,8 @@
 package ru.hehnev.springproductmarket.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.hehnev.springproductmarket.model.Product;
 import ru.hehnev.springproductmarket.service.ProductService;
@@ -25,8 +27,9 @@ public class ProductController {
     }
 
     @PostMapping
-    public void addProduct(@RequestBody Product product) {
+    public ResponseEntity<Void> addProduct(@RequestBody Product product) {
         productService.addProduct(product);
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @GetMapping("/change_price")

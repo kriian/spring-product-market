@@ -7,7 +7,7 @@ import ru.hehnev.springproductmarket.repository.ProductRepository;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.NoSuchElementException;
+import java.util.Optional;
 
 @Repository
 public class ProductRepositoryImpl implements ProductRepository {
@@ -29,11 +29,10 @@ public class ProductRepositoryImpl implements ProductRepository {
     }
 
     @Override
-    public Product findById(Long id) {
+    public Optional<Product> findById(Long id) {
         return products.stream()
                 .filter(product -> product.getId().equals(id))
-                .findFirst()
-                .orElseThrow(() -> new NoSuchElementException("No such product. id = " + id));
+                .findFirst();
     }
 
     @Override
@@ -43,7 +42,7 @@ public class ProductRepositoryImpl implements ProductRepository {
 
     @Override
     public void changeProductPrice(Long id, Integer price) {
-        Product product = findById(id);
+        Product product = findById(id).get();
         product.setPrice(product.getPrice() + price);
     }
 

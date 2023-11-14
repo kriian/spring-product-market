@@ -1,6 +1,6 @@
 package ru.hehnev.springproductmarket.service.impl;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.hehnev.springproductmarket.model.Product;
 import ru.hehnev.springproductmarket.repository.CartRepository;
@@ -9,10 +9,10 @@ import ru.hehnev.springproductmarket.service.CartService;
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class CartServiceImpl implements CartService {
 
-    @Autowired
-    private CartRepository cartRepository;
+    private final CartRepository cartRepository;
 
     @Override
     public List<Product> findAllProducts() {
