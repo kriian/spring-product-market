@@ -4,6 +4,8 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.ArgumentCaptor;
+import org.mockito.Captor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -60,7 +62,7 @@ class ProductServiceImplTest {
         }
 
         @Test
-        @DisplayName("Получение продукта по id с ошибкой")
+        @DisplayName("Получение продукта по несуществующему id")
         void findByIdWithNoResult() {
             final Long id = 99L;
             NoSuchElementException exception =
@@ -69,8 +71,18 @@ class ProductServiceImplTest {
         }
     }
 
-    @Test
-    void addProduct() {
+    @Nested
+    @DisplayName("Тесты ADD добавление продукта")
+    class PostMethodTest {
+
+        @Captor
+        private ArgumentCaptor<List<Product>> argumentCaptor;
+
+        @Test
+        @DisplayName("Добавление продукта")
+        void addProduct() {
+
+        }
     }
 
     @Test
